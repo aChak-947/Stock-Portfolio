@@ -82,10 +82,14 @@ WSGI_APPLICATION = 'stocks.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
     }
 }
+
+DATABASES['default'] = dj_database_url.config(default='postgres://ucylrkcgbnzazc:a044e017daec17b9c16118037b2ee17fe7ceccaaacbb04cdb2c2a2fee721cc44@ec2-35-170-85-206.compute-1.amazonaws.com:5432/ddg74ai35d7rqp')
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
